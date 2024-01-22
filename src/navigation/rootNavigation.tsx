@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer, createNavigationContainerRef } from "@react-navigation/native";
 import LoginScreen from '../screens/LoginSreen';
+import { useAppDispatch } from 'redux';
+import { useSelector } from 'react-redux';
 
 
 
@@ -15,7 +17,7 @@ export const navigationRef = createNavigationContainerRef()
 
 
 const RootNavigation: React.FC = () => {
-
+// const accessToken = useSelector(state => state?.user?.accessToken)
   return (
     <NavigationContainer>
       <Stack.Navigator    screenOptions={{

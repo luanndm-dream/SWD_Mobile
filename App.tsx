@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
@@ -12,7 +6,14 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import RootNavigation from './src/navigation/rootNavigation';
 import 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
+import {store} from './src/redux/store'
+import {useAppDispatch, useAppSelector} from './src/redux/reduxHook'
+
 const RootApp = () => {
+  const count = useAppSelector((state) => state.user.accessToken)
+  console.log('Access Token', count)
+  
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <StatusBar
@@ -28,7 +29,11 @@ const RootApp = () => {
 };
 
 function App(): JSX.Element {
-  return <RootApp />;
+  return (
+    <Provider store={store}>
+      <RootApp />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
