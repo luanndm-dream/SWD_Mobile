@@ -3,6 +3,7 @@ export default StyleSheet.create({
     droidSafeArea: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? 25 : 0,
-        marginHorizontal: 12
+        marginHorizontal: 12,
+        backgroundColor :'#FFFFFF'
     },
 });

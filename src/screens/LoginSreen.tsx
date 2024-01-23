@@ -10,13 +10,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import styleGobal from '../styles/styleGobal';
-// import TextInputComponent from '@components/TextInputComponent';
-// import {ButtonComponent, TextInputComponent} from '@components';
+
 import CheckBox from '@react-native-community/checkbox';
-import { ButtonComponent, TextInputComponent } from '../components';
+import { ButtonComponent, TextInputComponent } from '@/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAppSelector } from '@/redux/reduxHook';
+import { styleGobal } from '@/styles'
 
 const LoginScreen: React.FC = () => {
   const [userName, setUserName] = useState<String>('');

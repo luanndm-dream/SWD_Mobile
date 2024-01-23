@@ -1,16 +1,18 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@/components/*": ["././components/*"],
-      "@/styles/*": ["./styles/*"],
-      "@/assets/*": ["./assets/*"],
+      "@/*": ["./src/*"],
+      "@/components": ["components/*"],
+      "@/styles": ["styles"],
       "@/redux/*": ["./redux/*"],
-      "@/navigation/*": ["././navigation/*"],
+      "@/navigation/*": ["navigation/*"],
+      "@/icons/*" : ["assets/icons/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js"],
   "exclude": ["node_modules"]
 }
