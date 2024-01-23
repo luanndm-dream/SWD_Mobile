@@ -10,7 +10,8 @@
       "@/styles": ["styles"],
       "@/redux/*": ["./redux/*"],
       "@/navigation/*": ["navigation/*"],
-      "@/icons/*" : ["assets/icons/*"]
+      "@/icons/*" : ["assets/icons/*"],
+      "@/data/*" : ["data/"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js"],

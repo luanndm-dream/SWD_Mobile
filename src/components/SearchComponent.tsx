@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
             },
             android: {
                 elevation: 5
-    
             },
           }),
     },
@@ -50,5 +49,6 @@ const styles = StyleSheet.create({
     },
     textContent: {
         fontSize: 16,
+        marginLeft: 20
     }
 })

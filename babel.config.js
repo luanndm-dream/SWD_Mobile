@@ -11,11 +11,12 @@ module.exports =
           "extensions": [ ".jsx", ".ts", ".tsx",".svg"],
           alias: {
             tests: ['./tests/'],
-            "@/components": "./src/components/",
+            "@components": "./src/components/",
             "@redux": "./src/redux",
             "@navigation": "./src/navigation/",
             "@/styles": "./src/styles",
-            "@/icons": "./src/assets/icons/"
+            "@/icons": "./src/assets/icons/",
+            "@/data": "./src/data/",
           }
         }
       ]
