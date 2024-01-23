@@ -3,15 +3,15 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
+    "strict": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components": ["components/*"],
-      "@/styles": ["styles"],
-      "@/redux/*": ["./redux/*"],
-      "@/navigation/*": ["navigation/*"],
-      "@/icons/*" : ["assets/icons/*"],
-      "@/data/*" : ["data/"]
+      "@/components": ["./src/components"],
+      "@/styles": ["./src/styles"],
+      "@/redux": ["./src/redux"],
+      "@/navigation": ["./src/navigation"],
+      "@/icons": ["./src/assets/icons"],
+      "@/data": ["./src/data"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js"],
