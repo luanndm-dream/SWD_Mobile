@@ -12,13 +12,32 @@ import {
 import React, {useState} from 'react';
 import styleGobal from '../styles/styleGobal';
 // import TextInputComponent from '@components/TextInputComponent';
-import {ButtonComponent, TextInputComponent} from '@components/index';
+// import {ButtonComponent, TextInputComponent} from '@components';
 import CheckBox from '@react-native-community/checkbox';
-import {colorsStyle} from '@styles/colors';
+import { ButtonComponent, TextInputComponent } from '../components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppSelector } from '@/redux/reduxHook';
+
 const LoginScreen: React.FC = () => {
   const [userName, setUserName] = useState<String>('');
   const [password, setPassword] = useState<String>('');
   const [toogle, setToggle] = useState<boolean>(false);
+  const accessToken = useAppSelector((state) => state.user.accessToken)
+
+  const storeData = async (value: String)=> {
+    try {
+      await AsyncStorage.setItem('isLogged', JSON.stringify(value))
+      console.log('Store Success', value)
+    } catch (error) {
+      console.log('ERROR LOCAL STORAGE', error)
+    }
+  }
+
+  const handleLogin = () =>{
+    storeData('true')
+  }
+
+
   return (
     <SafeAreaView
       onTouchStart={() => Keyboard.dismiss()}
@@ -63,7 +82,7 @@ const LoginScreen: React.FC = () => {
           </View>
 
           <View style={styles.button}>
-            <ButtonComponent buttonText="Login" onPress={() => {}} />
+            <ButtonComponent buttonText="Login" onPress={handleLogin} />
           </View>
           <View style={styles.forgotPassword}>
             <TouchableOpacity>

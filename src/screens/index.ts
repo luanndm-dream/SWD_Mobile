@@ -1,1 +1,6 @@
 export { default as LoginScreen} from '../screens/LoginSreen'
+export { default as MainScreen} from '../screens/MainScreen'
+export { default as HomeScreen} from '../screens/HomeScreen'
+export { default as NotiScreen} from '../screens/NotiScreen'
+export { default as PurchaseScreen} from '../screens/PurchaseScreen'
+export { default as ProfileScreen} from '../screens/ProfileScreen'

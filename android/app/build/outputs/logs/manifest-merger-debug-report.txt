@@ -8,6 +8,7 @@ MERGED from /Users/luan/SWD_Mobile/android/app/src/main/AndroidManifest.xml:1:1-
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.125.0] /Users/luan/.gradle/caches/transforms-3/78849f144acfe48841156c5a1c4cf1ec/transformed/jetified-flipper-network-plugin-0.125.0/AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.125.0] /Users/luan/.gradle/caches/transforms-3/024dbf42cdc8215807d769da963f7240/transformed/jetified-flipper-fresco-plugin-0.125.0/AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper:0.125.0] /Users/luan/.gradle/caches/transforms-3/7791fe77b8ab9730d0e25ce55c6aa090/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:8:1-18:12
+MERGED from [:react-native-async-storage_async-storage] /Users/luan/SWD_Mobile/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-community_checkbox] /Users/luan/SWD_Mobile/node_modules/@react-native-community/checkbox/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-masked-view_masked-view] /Users/luan/SWD_Mobile/node_modules/@react-native-masked-view/masked-view/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] /Users/luan/SWD_Mobile/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
@@ -187,6 +188,8 @@ MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.125.0] /Users/luan/.gr
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.125.0] /Users/luan/.gradle/caches/transforms-3/024dbf42cdc8215807d769da963f7240/transformed/jetified-flipper-fresco-plugin-0.125.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper:0.125.0] /Users/luan/.gradle/caches/transforms-3/7791fe77b8ab9730d0e25ce55c6aa090/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper:0.125.0] /Users/luan/.gradle/caches/transforms-3/7791fe77b8ab9730d0e25ce55c6aa090/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:11:5-13:41
+MERGED from [:react-native-async-storage_async-storage] /Users/luan/SWD_Mobile/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-async-storage_async-storage] /Users/luan/SWD_Mobile/node_modules/@react-native-async-storage/async-storage/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_checkbox] /Users/luan/SWD_Mobile/node_modules/@react-native-community/checkbox/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_checkbox] /Users/luan/SWD_Mobile/node_modules/@react-native-community/checkbox/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-masked-view_masked-view] /Users/luan/SWD_Mobile/node_modules/@react-native-masked-view/masked-view/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41

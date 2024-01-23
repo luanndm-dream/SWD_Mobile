@@ -4,10 +4,11 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@/components": ["./components/*"],
-      "@/styles": ["./styles/*"],
-      "@/assets": ["./assets/*"],
-      "@/redux": ["./redux/*"]
+      "@/components/*": ["././components/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/redux/*": ["./redux/*"],
+      "@/navigation/*": ["././navigation/*"],
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
