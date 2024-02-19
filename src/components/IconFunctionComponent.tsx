@@ -22,21 +22,20 @@ export default IconFunctionComponent;
 
 const styles = StyleSheet.create({
   container: {
-  
+  justifyContent: 'center',
     alignItems: 'center',
     width: 90,
     height: 120,
-    margin: 10,
 
   },
   iconContainer: {
     backgroundColor: '#E0F4F9',
-    borderRadius: 50,
-    padding: 20,
+    borderRadius: 35,
+    
   },
   image: {
-    width: 40,
-    height: 40,
+    width: 70,
+    height: 70,
 
   },
   name: {

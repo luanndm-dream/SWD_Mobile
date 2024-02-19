@@ -14,15 +14,18 @@ import React, {useState} from 'react';
 import CheckBox from '@react-native-community/checkbox';
 import { ButtonComponent, TextInputComponent } from '@/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useAppSelector } from '@/redux/reduxHook';
+// import { useAppSelector } from '@/redux/reduxHook';
 import { styleGobal } from '@/styles'
+import { useAppSelector } from 'src/redux/reduxHook';
+import { loginAPI } from 'src/api';
+import useLoading from 'src/hook/useLoading';
 
 const LoginScreen: React.FC = () => {
-  const [userName, setUserName] = useState<String>('');
-  const [password, setPassword] = useState<String>('');
+  const [userName, setUserName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [toogle, setToggle] = useState<boolean>(false);
   const accessToken = useAppSelector((state) => state.user.accessToken)
-
+  const {showLoading, hideLoading} = useLoading();
   const storeData = async (value: String)=> {
     try {
       await AsyncStorage.setItem('isLogged', JSON.stringify(value))
@@ -34,6 +37,15 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = () =>{
     storeData('true')
+    console.log(userName,password)
+    loginAPI(userName,password).then((res: any)=>{
+      console.log('res', res.message)
+      showLoading()
+      if(res?.statusCode === 200){
+        console.log('login done')
+        // hideLoading()
+      }
+    })
   }
 
 
@@ -61,7 +73,7 @@ const LoginScreen: React.FC = () => {
           <View>
             <Text style={styles.title}>Password</Text>
             <TextInputComponent
-              onChangeText={setUserName}
+              onChangeText={setPassword}
               secureTextEntry={true}
             />
           </View>

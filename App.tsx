@@ -14,11 +14,12 @@ import RootNavigation from './src/navigation/rootNavigation';
 import 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import {store} from './src/redux/store'
-
-
+import { useAppSelector } from '@/redux'
+import { LoadingOverlay } from "./src/components";
 const RootApp = () => {
 
-
+const isLoading = useAppSelector((state)=>state.app.loading)
+console.log(isLoading)
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <StatusBar
@@ -28,6 +29,7 @@ const RootApp = () => {
       />
       <SafeAreaProvider>
         <RootNavigation />
+        {isLoading&&<LoadingOverlay/>}
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

@@ -40,6 +40,7 @@ const HomeScreen: React.FC = () => {
           <View>
             <Text style={styles.title}>Chức năng chính</Text>
             <FlatList
+             scrollEnabled={false}
             numColumns={3}
               data={dataMainFunction}
               renderItem={({item}) => {
@@ -58,6 +59,7 @@ const HomeScreen: React.FC = () => {
           <View>
             <Text style={styles.title}>Chức năng thông minh</Text>
             <FlatList
+            scrollEnabled={false}
             numColumns={3}
               data={dataSmartFunction}
               renderItem={({item}) => {
@@ -86,9 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerIcon: {
-    backgroundColor: '#E0F4F9',
-    width: 50,
-    height: 50,
+ 
   },
   dataGridView: {
     flex: 1,
@@ -116,6 +116,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 17,
+    marginTop: 8,
   },
 });

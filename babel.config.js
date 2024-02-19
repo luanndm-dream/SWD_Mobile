@@ -23,6 +23,8 @@ module.exports = {
           '@/styles': './src/styles',
           '@/icons': './src/assets/icons',
           '@/data': './src/data',
+          '@/constants': './src/constants',
+          '@/hooks': './src/hooks',
         },
       },
     ],

@@ -6,8 +6,8 @@ import {
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import LoginScreen from '../screens/LoginSreen';
-import {useAppSelector} from '@/redux/reduxHook';
 import MainBottomTab from './MainBottomTab';
+import { useAppSelector } from 'src/redux/reduxHook';
 
 
 const Stack = createStackNavigator();

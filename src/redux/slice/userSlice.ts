@@ -1,14 +1,16 @@
 // userSlice.ts
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "redux/store";
+import { RootState } from "../store";
+// import { RootState } from "redux/store";
 
 export interface UserInfo {
-  accessToken: string;
+  accessToken: string |undefined;
   role?: string | undefined;
 }
 
 const initialState: UserInfo = {
-  accessToken: 'sadkjhgasdhjgashj',
+  // accessToken: 'sadkjhgasdhjgashj',
+  accessToken: undefined,
   role: undefined,
 };
 
