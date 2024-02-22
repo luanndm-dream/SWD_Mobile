@@ -1,23 +1,35 @@
-import React, {useEffect, useState} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {
-  NavigationContainer,
-  createNavigationContainerRef,
-} from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import LoginScreen from '../screens/LoginSreen';
 import MainBottomTab from './MainBottomTab';
 import { useAppSelector } from 'src/redux/reduxHook';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
-// const Tab = createMaterialBottomTabNavigator();
 export const navigationRef = createNavigationContainerRef();
 
 const RootNavigation: React.FC = () => {
-  const accessToken = useAppSelector(state => state.user.accessToken);
- 
+  const accessToken = useAppSelector(state => state.user.token);
+
+  // const [userData, setUserData] = useState<any | null>(null);
+  
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('isLogged');
+      // setUserData(jsonValue != null ? JSON.parse(jsonValue) : null);
+      // console.log('lấy dữ liệu ra', userData);
+    } catch (error) {
+      console.log('Lỗi get dữ liệu từ store', error);
+    }
+  }
+
+  // useEffect(() => {
+  // getData();
+  // console.log(userData?.data?.token)
+  // }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator

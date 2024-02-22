@@ -16,16 +16,21 @@ import { ButtonComponent, TextInputComponent } from '@/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { useAppSelector } from '@/redux/reduxHook';
 import { styleGobal } from '@/styles'
-import { useAppSelector } from 'src/redux/reduxHook';
+import { useAppDispatch, useAppSelector } from 'src/redux/reduxHook';
 import { loginAPI } from 'src/api';
 import useLoading from 'src/hook/useLoading';
+import { setUserInfo } from 'src/redux/slice';
+import { useNavigation } from '@react-navigation/native';
+import MainScreen from './MainScreen';
 
 const LoginScreen: React.FC = () => {
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [toogle, setToggle] = useState<boolean>(false);
-  const accessToken = useAppSelector((state) => state.user.accessToken)
+  const [toggle, setToggle] = useState<boolean>(false);
+
   const {showLoading, hideLoading} = useLoading();
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation()
   const storeData = async (value: String)=> {
     try {
       await AsyncStorage.setItem('isLogged', JSON.stringify(value))
@@ -35,24 +40,40 @@ const LoginScreen: React.FC = () => {
     }
   }
 
-  const handleLogin = () =>{
-    storeData('true')
-    console.log(userName,password)
-    loginAPI(userName,password).then((res: any)=>{
-      console.log('res', res.message)
-      showLoading()
+  const handleLogin = () =>{   
+    showLoading()
+    loginAPI(userName,password).then( async (res: any)=>{
       if(res?.statusCode === 200){
-        console.log('login done')
-        // hideLoading()
+        hideLoading()
+        // storeData(res)
+        // dispatch(setUserInfo(res.data));
+        setTimeout(()=> {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainScreen' as never}],
+            })
+        })
+      }else if(res?.statusCode ===200 && toggle){
+        storeData(res)
+        setTimeout(()=> {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainScreen' as never}],
+          })
+      })
+        hideLoading()
+      }else{
+        hideLoading()
       }
     })
   }
 
 
+
   return (
     <SafeAreaView
       onTouchStart={() => Keyboard.dismiss()}
-      style={styleGobal.droidSafeArea}>
+      style={styleGobal.androidSafeArea}>
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.welcome}>Welcome to</Text>
@@ -79,10 +100,10 @@ const LoginScreen: React.FC = () => {
           </View>
           <View style={styles.savePassword}>
             <CheckBox
-              value={toogle}
+              value={toggle}
               boxType="square"
               lineWidth={2}
-              onValueChange={() => setToggle(!toogle)}
+              onValueChange={() => setToggle(!toggle)}
               style={{width: 18, height: 18, padding: 2}}
               onCheckColor={Platform.OS === 'ios' ? '#4BA2B6' : ''}
               animationDuration={1}

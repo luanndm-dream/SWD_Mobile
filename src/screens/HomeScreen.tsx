@@ -87,9 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flex: 1,
   },
-  containerIcon: {
- 
-  },
   dataGridView: {
     flex: 1,
     justifyContent: 'center',
