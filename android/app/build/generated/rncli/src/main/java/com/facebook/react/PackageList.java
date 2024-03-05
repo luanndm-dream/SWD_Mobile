@@ -21,6 +21,10 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-maps
+import com.rnmaps.maps.MapsPackage;
+// react-native-pager-view
+import com.reactnativepagerview.PagerViewPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
@@ -79,6 +83,8 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
+      new MapsPackage(),
+      new PagerViewPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
       new SvgPackage(),

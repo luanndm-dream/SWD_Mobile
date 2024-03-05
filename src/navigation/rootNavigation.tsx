@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginSreen';
 import MainBottomTab from './MainBottomTab';
 import { useAppSelector } from 'src/redux/reduxHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CompanyInformationScreen } from 'src/screens';
 
 const Stack = createStackNavigator();
 
@@ -25,10 +26,7 @@ const RootNavigation: React.FC = () => {
     }
   }
 
-  // useEffect(() => {
-  // getData();
-  // console.log(userData?.data?.token)
-  // }, []);
+
 
   return (
     <NavigationContainer>
@@ -38,6 +36,7 @@ const RootNavigation: React.FC = () => {
         }}
         initialRouteName={accessToken ? 'MainScreen' : 'LoginScreen'}>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name='CompanyInformationScreen' component={CompanyInformationScreen}/>
         <Stack.Screen name="MainScreen" component={MainBottomTab} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -114,7 +114,7 @@ const LoginScreen: React.FC = () => {
           </View>
 
           <View style={styles.button}>
-            <ButtonComponent buttonText="Login" onPress={handleLogin} />
+            <ButtonComponent buttonText="Login" onPress={handleLogin} colorButton='#4BA2B6' />
           </View>
           <View style={styles.forgotPassword}>
             <TouchableOpacity>
