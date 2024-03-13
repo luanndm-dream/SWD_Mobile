@@ -6,6 +6,7 @@ import MainBottomTab from './MainBottomTab';
 import { useAppSelector } from 'src/redux/reduxHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CompanyInformationScreen } from 'src/screens';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ const RootNavigation: React.FC = () => {
 
 
   return (
+    <SafeAreaProvider>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -40,6 +42,7 @@ const RootNavigation: React.FC = () => {
         <Stack.Screen name="MainScreen" component={MainBottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

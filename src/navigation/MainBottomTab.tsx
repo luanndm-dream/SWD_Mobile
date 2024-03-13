@@ -12,15 +12,21 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useTheme} from 'react-native-paper';
 import TopTabNavigation from './TopTabNavigation';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import { HeaderComponent } from '@/components';
+import { Platform, SafeAreaView, StyleSheet } from 'react-native';
+import { styleGobal } from '@/styles';
 
 const bottomTab = createMaterialBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 const TopTabNavigator = () => {
   return (
+    <SafeAreaView style={styles.topTapStyle}>
+   
     <TopTab.Navigator>
       <TopTab.Screen name="NoProcess" component={NoProcessScreen} />
       <TopTab.Screen name="Process" component={ProcessScreen} />
     </TopTab.Navigator>
+    </SafeAreaView>
   );
 };
 const MainBottomTab = () => {
@@ -80,3 +86,9 @@ const MainBottomTab = () => {
 };
 
 export default MainBottomTab;
+const styles = StyleSheet.create({
+  topTapStyle : {
+    flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 25 : 0
+  }
+})

@@ -9,13 +9,14 @@ import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+
 import RootNavigation from './src/navigation/rootNavigation';
-import 'react-native-gesture-handler';
+
 import { Provider } from 'react-redux';
 import {store} from './src/redux/store'
 import { useAppSelector } from '@/redux'
 import { LoadingOverlay } from "./src/components";
+import { GestureHandlerRootView} from 'react-native-gesture-handler';
 const RootApp = () => {
 
 const isLoading = useAppSelector((state)=>state.app.loading)

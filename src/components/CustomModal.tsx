@@ -1,13 +1,21 @@
-import { View,Modal as RNModal, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { View,Modal as RNModal, Text, StyleSheet, TouchableWithoutFeedback, ModalProps, Platform, StatusBar } from 'react-native'
 import React from 'react'
+interface CustoModalProps extends ModalProps {
+  onBackDropPress ?: () => void,
+  children?: any,
+}
 
-const CustomModal = (props :any) => {
+const CustomModal : React.FC<CustoModalProps>= ({onBackDropPress, children,...modalOtherProps}) => {
 
-    const { onBackdropPress, children, ...modalOtherProps } = props;
+    
   return (
-    <RNModal transparent animationType="fade" {...modalOtherProps}>
+    <RNModal transparent animationType="fade" {...modalOtherProps} style={{margin: 0}}>
+      {Platform.OS === 'android' ?
+         <StatusBar hidden={true}/>
+         : null
+    }
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={onBackdropPress}>
+      <TouchableWithoutFeedback onPress={onBackDropPress}>
         <View style={styles.backdrop} />
       </TouchableWithoutFeedback>
       {children}
@@ -21,7 +29,7 @@ export default CustomModal
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "rgba(55, 46, 52, 0.4)",
+      // backgroundColor: 'rgba(0,0,0,0.5)',
     },
     backdrop: {
       ...StyleSheet.absoluteFillObject,

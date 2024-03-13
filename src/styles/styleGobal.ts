@@ -2,14 +2,14 @@ import {StyleSheet, Platform} from 'react-native';
 export default StyleSheet.create({
   androidSafeArea: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 0,
+    paddingTop: Platform.OS === 'android' ? 20 : 0,
     paddingHorizontal: 12,
     // backgroundColor: '#FFFFFF',
   },
   contentArea: {
     flex: 1,
 
-    paddingTop: Platform.OS === 'android' ? 25 : 0,
+    paddingTop: Platform.OS === 'android' ? 20 : 0,
     paddingHorizontal: 12,
     backgroundColor: '#FFFFFF',
   },
