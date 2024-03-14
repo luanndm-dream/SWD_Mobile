@@ -7,7 +7,7 @@ import moment from 'moment';
 import ButtonComponent from './ButtonComponent';
 
 interface DateTimePickerProps {
-  value?: string | any;
+  value?: any;
   defaultValue?: any;
   onConfirm: Function;
   onCancel?: () => void;
@@ -72,7 +72,7 @@ const DatePicker: React.FC<DateTimePickerProps> = ({
 
   const defaultDate = () => {
     if (value && moment(value).isValid()) {
-      console.log('value',value)
+      console.log(' value is Valid',value)
       return value;
     }
     if (defaultValue && moment(defaultValue).isValid()) return defaultValue;
@@ -81,16 +81,18 @@ const DatePicker: React.FC<DateTimePickerProps> = ({
 
   const date = defaultDate();
   let month = useRef(moment(date).format('MM'));
-
-  let year = useRef(moment(date).format('YYYY'));
-    console.log(year)
   let day = useRef(moment(date).format('DD'));
+  let year = useRef(moment(date).format('YYYY'));
 
+  console.log('=====',year)
   // Calculate the initial index for the WheelPickers
 
   const monthIndex = months().findIndex(e => e.value === month.current);
   const dayIndex = days().findIndex(e => e.value === day.current);
   const yearIndex = years().findIndex(e => e.value === year.current);
+
+
+  console.log('===YEAR INDEX==',year)
 
   const checkDate = () => {
     const dayInMonths = moment(
@@ -192,8 +194,7 @@ const DatePicker: React.FC<DateTimePickerProps> = ({
             colorButton="#4BA2B6"
             onPress={()=>{
               const dateOutput = `${day.current}-${month.current}-${year.current}`
-              onConfirm(dateOutput)
-
+              onConfirm?.(dateOutput)
             }}
           />
         </View>

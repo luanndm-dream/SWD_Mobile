@@ -15,11 +15,29 @@ import React from 'react';
 
 import {SearchComponent, IconFunctionComponent} from '@/components';
 import {dataMainFunction,dataSmartFunction} from '@/data';
+import { useNavigation } from '@react-navigation/native';
 
 
 // import { styleGobal } from 'styles'
 
 const HomeScreen: React.FC = () => {
+  const navigation = useNavigation()
+  const onPressIconHandle = (name: string)=>{
+          switch(name){
+            case 'Tra cứu' :{
+              navigation.navigate('MapScreen' as never)
+              break;
+            }
+            case'Tìm Đường' : {
+              navigation.navigate('MapScreen' as never)
+              break;
+            }
+            case'Tạo đơn' : {
+              navigation.navigate('CreateOrderScreen' as never)
+              break;
+            }
+          }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1}}>
@@ -41,7 +59,7 @@ const HomeScreen: React.FC = () => {
             <Text style={styles.title}>Chức năng chính</Text>
             <FlatList
              scrollEnabled={false}
-            numColumns={3}
+              numColumns={3}
               data={dataMainFunction}
               renderItem={({item}) => {
                 console.log('data', item.imgName, item.name);
@@ -50,6 +68,7 @@ const HomeScreen: React.FC = () => {
                     <IconFunctionComponent
                       name={item.name}
                       imgUrl={item.imgName}
+                      onPress={()=>onPressIconHandle(item.name)}
                     />
                   </View>
                 );

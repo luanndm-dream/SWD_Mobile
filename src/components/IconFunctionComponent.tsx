@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, GestureResponderEvent } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 interface IconFuncProp {
   name: string | any;
   imgUrl: string | any;
+  onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
-const IconFunctionComponent: React.FC<IconFuncProp> = ({ name, imgUrl }) => {
+const IconFunctionComponent: React.FC<IconFuncProp> = ({ name, imgUrl ,onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.iconContainer}>
         <Image source={imgUrl} style={styles.image} />
       </View>

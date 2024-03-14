@@ -1,12 +1,12 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 import React from 'react'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-interface DateTimePickerProps {
-    text: String | boolean,
-    isRequired?: Boolean 
-    onPress?: ()=> void
+import { GestureResponderHandlers } from 'react-native';
+interface DateTimePickerProps extends TouchableOpacityProps {
+    text: any;
+    isRequired?: boolean;
+    onPress?: () =>void
 }
-
 const DateTimePickerComponent : React.FC<DateTimePickerProps> = ( {isRequired,text,onPress}) => {
 
 

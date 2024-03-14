@@ -1,7 +1,7 @@
 
 import { BASE_URL } from "@/constants";
 
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { store } from "src/redux/store";
 
 
@@ -58,27 +58,32 @@ publicAxios.interceptors.response.use(
 protectedAxios.interceptors.request.use(
     function (config) {
       const accessToken = store.getState().user?.token;
+      
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
+     
       }
   
       return config;
     },
     function (error) {
+      
       return Promise.reject(error);
+      
     }
   );
   
   protectedAxios.interceptors.response.use(
-    function (response) {
+    function (response: any) {
+      
       const responseObj = {
         ...response.data,
         statusCode: response.status,
       };
-  
+      console.log('vào congif API', responseObj)
       return responseObj;
     },
-    function (error) {
+    function (error): number {
         const statusCode = error.response.status
       if(error.response.status == 401){
         // store.dispatch(removeUser());
