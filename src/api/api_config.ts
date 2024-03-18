@@ -80,7 +80,7 @@ protectedAxios.interceptors.request.use(
         ...response.data,
         statusCode: response.status,
       };
-      console.log('vào congif API', responseObj)
+      // console.log('vào congif API', responseObj)
       return responseObj;
     },
     function (error): number {

@@ -46,10 +46,16 @@ const NoProcess = () => {
   useEffect(() => {
     showLoading();
     getAllPackageApi().then((res: any) => {
-      console.log('res', res);
+    
       if (res.statusCode === 200) {
-        setDataItem(res.data.items);
-        console.log('lig');
+        const processingItem = res.data.items.map((item: any)=>{
+          return {
+            ...item,
+            status: 0
+          }
+        })
+        setDataItem(processingItem);
+        
         hideLoading();
       } else {
         alert('loi api');
@@ -57,6 +63,29 @@ const NoProcess = () => {
       }
     });
   }, []);
+
+  const searchHandle = (fromDate: Date | null, toDate: Date | null) => {
+  console.log('gọiData', fromDate,toDate);
+  showLoading();
+  getAllPackageApi(fromDate, toDate).then((res: any) => {
+    console.log('resFilter', res.data.items);
+    if (res.statusCode === 200) {
+      const processingItem = res.data.items.map((item: any) => {
+        return {
+          ...item,
+          status: 0,
+        };
+      });
+      setDataItem(processingItem);
+      
+      hideLoading();
+    } else {
+      alert('loi api');
+      hideLoading();
+    }
+  });
+};
+
 
   return (
     <>
@@ -79,6 +108,7 @@ const NoProcess = () => {
               buttonText="Tìm kiếm"
               colorButton="#4BA2B6"
               style={styles.buttonConfirm}
+              onPress={()=>searchHandle(fromDate, toDate)}
             />
           </View>
           <View style={styleGobal.contentArea}>

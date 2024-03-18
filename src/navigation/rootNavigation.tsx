@@ -5,7 +5,7 @@ import LoginScreen from '../screens/LoginSreen';
 import MainBottomTab from './MainBottomTab';
 import { useAppSelector } from 'src/redux/reduxHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CompanyInformationScreen, CreateOrderScreen, MapScreen } from 'src/screens';
+import { CompanyInformationScreen, CreateOrderScreen, MapScreen, PackageDetailScreen } from 'src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createStackNavigator();
@@ -42,6 +42,7 @@ const RootNavigation: React.FC = () => {
         <Stack.Screen name='MapScreen' component={MapScreen}/>
         <Stack.Screen name='CreateOrderScreen' component={CreateOrderScreen}/>
         <Stack.Screen name="MainScreen" component={MainBottomTab} />
+        <Stack.Screen name='PackageDetailScreen' component={PackageDetailScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaProvider>

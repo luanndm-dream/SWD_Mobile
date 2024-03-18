@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://busdeliveryapi.azurewebsites.net/api/v1/'
+export const BASE_URL = 'https://busdeliveryapi.azurewebsites.net/Api/V1/'
