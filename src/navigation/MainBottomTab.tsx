@@ -10,11 +10,11 @@ import {
 } from '../screens/index';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTheme} from 'react-native-paper';
-import TopTabNavigation from './TopTabNavigation';
+
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import { HeaderComponent } from '@/components';
+
 import { Platform, SafeAreaView, StyleSheet } from 'react-native';
-import { styleGobal } from '@/styles';
+
 
 const bottomTab = createMaterialBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();

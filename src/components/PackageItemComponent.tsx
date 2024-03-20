@@ -22,8 +22,8 @@ const PackageItemComponent: React.FC<PackageItemProps> = ({
   onPress
 }) => {
   // const formatDate = formmatedDate(createTime)
-  const [datePart, timePart] = createTime.split(' ');
-  const [hourMinuteSecond] = timePart.split(':');
+  // const [datePart, timePart] = createTime?.split(' ');
+  // const [hourMinuteSecond] = timePart.split(':');
   let statusPackage;
 switch (status) {
   case -1: {
@@ -61,15 +61,18 @@ switch (status) {
         </View>
         <View style={styles.label}>
           <Text style={styles.title}>Thời gian gửi:</Text>
-          <Text style={styles.item}> {datePart}</Text>
+          <Text style={styles.item}> {createTime}</Text>
         </View>
       </View>
       <View style={styles.imageContainer}>
         {/* <Image source={{uri: `${imageUrl}`}} style={styles.image} /> */}
         <Image
-          source={{uri: 'https://reactjs.org/logo-og.png'}}
-          style={{width: 100, height: 100, marginBottom: 8}}
-        />
+            source={{
+              uri: `data:image/jpeg;base64,${imageUrl}`,
+            }}
+            style={styles.image}
+            resizeMode="cover"
+          />
         <Text style={{ color: status === 1 ? 'green' : status === 0 ? 'orange' : 'red' , fontSize: 18, fontWeight: 'bold'}}>{statusPackage}</Text>
       </View>
     </TouchableOpacity>
@@ -100,8 +103,8 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
   },
   image: {
-    width: 75,
-    height: 62,
+    width: 100,
+    height: 100,
   },
   item: {
     fontSize: 18,

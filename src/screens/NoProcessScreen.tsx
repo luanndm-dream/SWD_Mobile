@@ -19,8 +19,10 @@ import {isEmpty} from 'src/utils/validation';
 import moment from 'moment';
 import {getAllPackageApi} from 'src/api/get_package_api';
 import useLoading from 'src/hook/useLoading';
+import { useNavigation } from '@react-navigation/native';
 
 const NoProcess = () => {
+  const navigation = useNavigation<any>()
   const {showLoading, hideLoading} = useLoading();
   const [visible, setVisile] = useState(false);
   const [dateOutput, setDateOutput] = useState<Date>();
@@ -86,6 +88,13 @@ const NoProcess = () => {
   });
 };
 
+const onNavigationDetailScreen = (item: any) => {
+  navigation.navigate('PackageDetailScreen', {
+    data: item
+  });
+};
+
+
 
   return (
     <>
@@ -124,6 +133,7 @@ const NoProcess = () => {
                     weight={item.totalWeight}
                     imageUrl={item.image}
                     status={item.status}
+                    onPress={()=>onNavigationDetailScreen(item)}
                   />
                 );
               }}

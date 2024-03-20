@@ -22,7 +22,7 @@ import useLoading from 'src/hook/useLoading';
 import { useNavigation } from '@react-navigation/native';
 const ProcessScreen = () => {
   const {showLoading, hideLoading} = useLoading();
-  const navigation = useNavigation()
+  const navigation = useNavigation<any>()
   const [visible, setVisile] = useState(false);
   const [dateOutput, setDateOutput] = useState<Date>();
   const [activeComponent, setActiveComponent] = useState<String>();
@@ -47,13 +47,14 @@ const ProcessScreen = () => {
   useEffect(() => {
     showLoading();
     getAllPackageApi().then((res: any) => {
+      console.log(res)
       if (res.statusCode === 200) {
         const processItem: any[] = [];
         res.data.items.forEach((item: any) => {
-          if (item.status === -1 || item.status === 1) {
+          if (item?.status === -1 || item?.status === 1) {
             processItem.push({
               ...item,
-              status: item.status
+              status: item?.status
             });
           }
         });
@@ -89,13 +90,11 @@ const ProcessScreen = () => {
     }
   });
 };
-
-  const onNavigationDetailScreen = () =>{
-    console.log(
-      'move'
-    )
-      navigation.navigate('PackageDetailScreen' as never) 
-  }
+const onNavigationDetailScreen = (item: any) => {
+  navigation.navigate('PackageDetailScreen', {
+    data: item
+  });
+};
 
   return (
     <>
@@ -134,7 +133,7 @@ const ProcessScreen = () => {
                     weight={item.totalWeight}
                     imageUrl={item.image}
                     status={item.status}
-                    onPress={()=>onNavigationDetailScreen()}
+                    onPress={()=>onNavigationDetailScreen(item)}
                   />
                 );
               }}

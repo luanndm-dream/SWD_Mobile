@@ -7,7 +7,7 @@ import { store } from "src/redux/store";
 
 
 
-const TIME_OUT = 90000
+const TIME_OUT = 10000
 
 export const publicAxios = axios.create({
     baseURL: BASE_URL,
@@ -80,12 +80,13 @@ protectedAxios.interceptors.request.use(
         ...response.data,
         statusCode: response.status,
       };
-      // console.log('vào congif API', responseObj)
+      console.log('vào congif API', responseObj)
       return responseObj;
     },
     function (error): number {
+      console.log('loi trong function Axios Error', error)
         const statusCode = error.response.status
-      if(error.response.status == 401){
+      if(error?.response?.status == statusCode){
         // store.dispatch(removeUser());
         // RootNavigation.navigate(SCREENS.LOGIN)
       } else if (error.response && error.response.status === 400) {

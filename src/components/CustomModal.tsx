@@ -9,7 +9,7 @@ const CustomModal : React.FC<CustoModalProps>= ({onBackDropPress, children,...mo
 
     
   return (
-    <RNModal transparent animationType="fade" {...modalOtherProps} style={{margin: 0}}>
+    <RNModal statusBarTranslucent transparent animationType="fade" {...modalOtherProps} style={{margin: 0}} >
       {Platform.OS === 'android' ?
          <StatusBar hidden={true}/>
          : null
@@ -29,7 +29,7 @@ export default CustomModal
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      // backgroundColor: 'rgba(0,0,0,0.5)',
+      backgroundColor: 'rgba(0,0,0,0.2)',
     },
     backdrop: {
       ...StyleSheet.absoluteFillObject,
