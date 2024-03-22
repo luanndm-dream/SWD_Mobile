@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"AIzaSyAHx8KANDNuBZoBeCwZJf0k6mFytjksA3E"];
+  [GMSServices provideAPIKey:@"AIzaSyAHx8KANDNuBZoBeCwZJf0k6mFytjksA3E"]; // Thêm dòng này với API key của bạn
   self.moduleName = @"BusDelivery";
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
   

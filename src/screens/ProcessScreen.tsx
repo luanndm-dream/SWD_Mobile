@@ -20,6 +20,7 @@ import moment from 'moment';
 import {getAllPackageApi} from 'src/api/get_package_api';
 import useLoading from 'src/hook/useLoading';
 import { useNavigation } from '@react-navigation/native';
+import { getAllPackageByStatusApi } from 'src/api/get_packageByStatus_api';
 const ProcessScreen = () => {
   const {showLoading, hideLoading} = useLoading();
   const navigation = useNavigation<any>()
@@ -46,19 +47,20 @@ const ProcessScreen = () => {
 
   useEffect(() => {
     showLoading();
-    getAllPackageApi().then((res: any) => {
-      console.log(res)
+    getAllPackageByStatusApi(1).then((res: any) => {
+      // console.log(res)
       if (res.statusCode === 200) {
-        const processItem: any[] = [];
-        res.data.items.forEach((item: any) => {
-          if (item?.status === -1 || item?.status === 1) {
-            processItem.push({
-              ...item,
-              status: item?.status
-            });
-          }
-        });
-        setDataItem(processItem);
+        // const processItem: any[] = [];
+        // res.data.items.forEach((item: any) => {
+        //   if (item?.status === 4 || item?.status === 1 || item?.status === -1) {
+        //     processItem.push({
+        //       ...item,
+        //       status: item?.status
+        //     });
+        //   }
+        // });
+        // setDataItem(processItem);
+        setDataItem(res.data.items)
         hideLoading();
       } else {
         alert('loi api');
@@ -70,12 +72,12 @@ const ProcessScreen = () => {
   const searchHandle = (fromDate: Date | null, toDate: Date | null) => {
   console.log('gọiData', fromDate,toDate);
   showLoading();
-  getAllPackageApi(fromDate, toDate).then((res: any) => {
+  getAllPackageApi(fromDate?fromDate : null, toDate? toDate : null).then((res: any) => {
     console.log('resFilter', res.data.items);
     if (res.statusCode === 200) {
       const processItem: any[] = [];
         res.data.items.forEach((item: any) => {
-          if (item.status === -1 || item.status === 1) {
+          if (item.status === 1) {
             processItem.push({
               ...item,
               status: item.status

@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -17,7 +18,7 @@ import {
 } from '@/components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { deletePackageById } from 'src/api/delete_package_api';
+import {deletePackageById} from 'src/api/delete_package_api';
 import useLoading from 'src/hook/useLoading';
 
 const PackageDetailScreen: React.FC = () => {
@@ -41,7 +42,7 @@ const PackageDetailScreen: React.FC = () => {
     status,
     createTime,
   } = route.params.data || route.params.dataFromNoti;
-  const [packageInfo,setPackageInfo] = useState([
+  const [packageInfo, setPackageInfo] = useState([
     {
       label: 'Mã đơn hàng',
       value: id.toString(),
@@ -99,6 +100,12 @@ const PackageDetailScreen: React.FC = () => {
           color: '#FC6B03',
           iconName: 'progress-clock',
         };
+      case 5:
+        return {
+          backgroundColor: '#d6f7ff',
+          color: '#4BA2B6',
+          iconName: 'new-box',
+        };
       default:
         return {
           backgroundColor: '#E8F7EF',
@@ -114,43 +121,40 @@ const PackageDetailScreen: React.FC = () => {
     setPopupVisible(true);
   };
   const onDelete = (id: string) => {
-    showLoading()
-    deletePackageById(id).then((res)=>{
-      console.log('Delete success', res),
-      hideLoading()
-      setPopupVisible(false)
-    })
-  }
+    showLoading();
+    deletePackageById(id).then(res => {
+      console.log('Delete success', res), hideLoading();
+      setPopupVisible(false);
+    });
+  };
 
-  const onEit = (id?: string) =>{
-    setIsEdit(!isEdit)
-    setPopupVisible(false)
-  }
+  const onEit = (id?: string) => {
+    setIsEdit(!isEdit);
+    setPopupVisible(false);
+  };
 
   const onPressBackIcon = () => {
     navigation.goBack();
   };
   const onEditHandle = () => {
-
-      console.log('edit Success');
-      setIsEdit(false);
-  
-  }
+    console.log('edit Success');
+    setIsEdit(false);
+  };
   const onSubmitEdit = (values: any) => {
     // Xử lý dữ liệu từ component con ở đây
-    console.log("Submitted values:", values);
+    console.log('Submitted values:', values);
   };
   const handleValueChange = (label: string, newValue: any) => {
     // Tìm và cập nhật giá trị mới cho label tương ứng
-    setPackageInfo((prevPackageInfo) =>
-      prevPackageInfo.map((item) =>
-        item.label === label ? { ...item, value: newValue } : item
-      )
+    setPackageInfo(prevPackageInfo =>
+      prevPackageInfo.map(item =>
+        item.label === label ? {...item, value: newValue} : item,
+      ),
     );
   };
-  useEffect(()=>{
-    console.log(packageInfo[2])
-  },[packageInfo, onEditHandle])
+  useEffect(() => {
+    console.log(packageInfo[2]);
+  }, [packageInfo, onEditHandle]);
 
   return (
     <>
@@ -165,10 +169,14 @@ const PackageDetailScreen: React.FC = () => {
             <MaterialCommunityIcons name={iconName} size={24} color={color} />
             <Text style={[styles.textLabel, {color: color}]}>
               {status === 1
-                ? 'Hoàn thành'
+                ? 'Xong'
                 : status === 0
                 ? 'Đang xử lý'
-                : 'Bị huỷ'}
+                : status === 5
+                ? 'Tạo mới'
+                : status === -1
+                ? 'Bị huỷ'
+                : 'Đã xoá'}
             </Text>
           </View>
           <FlatList
@@ -184,12 +192,13 @@ const PackageDetailScreen: React.FC = () => {
                     imageUrl={item.imageUrl}
                     isImage={item.isImage}
                     isEdit={isEdit}
-                    onSubmit={onSubmitEdit}                  />
+                    onSubmit={onSubmitEdit}
+                  />
                 </>
               );
             }}
           />
-          
+
           {/* {status === -1 && isEdit === false ? (
             <>
             <View style={styles.dualButton}>
@@ -221,8 +230,8 @@ const PackageDetailScreen: React.FC = () => {
                 ? 'Xoá đơn khỏi hệ thống?'
                 : 'Chỉnh sửa đơn?'
             }
-            onEdit={()=>onEit()}
-            onDelete={()=>onDelete(id)}
+            onEdit={() => onEit()}
+            onDelete={() => onDelete(id)}
           />
         )}
       </View>
@@ -243,6 +252,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 56,
     borderRadius: 8,
+    // marginVertical: Platform.OS === 'ios' ? ,
     paddingHorizontal: 8,
   },
   textLabel: {

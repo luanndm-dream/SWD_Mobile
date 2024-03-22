@@ -85,7 +85,7 @@ const HomeScreen: React.FC = () => {
       </View>
       <View style={{flex: 2, marginHorizontal: 8}}>
         <View>
-          <SearchComponent />
+          {/* <SearchComponent /> */}
           <View>
             <Text style={styles.title}>Chức năng chính</Text>
             <FlatList
@@ -107,19 +107,18 @@ const HomeScreen: React.FC = () => {
             />
           </View>
           <View>
-            <Text style={styles.title}>Chức năng thông minh</Text>
+            {/* <Text style={styles.title}>Chức năng thông minh</Text> */}
             <FlatList
             scrollEnabled={false}
             numColumns={3}
               data={dataSmartFunction}
               renderItem={({item}) => {
-        
                 return (
                   <View style={styles.dataGridView}>
                     <IconFunctionComponent
-                      name={item.name}
-                      imgUrl={item.imgName}
-                      onPress={()=>onPressIconHandle(item.name)}
+                      name={item?.name}
+                      imgUrl={item?.imgName}
+                      onPress={()=>onPressIconHandle(item?.name)}
                     />
                   </View>
                 );

@@ -108,9 +108,10 @@ const styles = StyleSheet.create({
   },
   styleItem: {
     marginTop: 110,
+    height: 40
   },
   button: {
-    marginTop: 50,
+    marginTop: 200,
     marginHorizontal: 80,
     backgroundColor: '#EDF4FC'
   },

@@ -35,7 +35,15 @@ switch (status) {
     break;
   }
   case 1: {
-    statusPackage = 'Hoàn thành';
+    statusPackage = 'Xong';
+    break;
+  }
+  case 4: {
+    statusPackage = 'Xoá';
+    break;
+  }
+  case -1: {
+    statusPackage = 'Huỷ';
     break;
   }
   default: {
@@ -88,6 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#ECECEC',
     marginVertical: 10,
+    marginTop: 10,
     borderRadius: 9},
   content:{
     padding: 8
@@ -103,8 +112,9 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 60,
+    height: 60,
+    borderRadius: 4
   },
   item: {
     fontSize: 18,

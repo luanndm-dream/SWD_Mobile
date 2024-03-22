@@ -9,7 +9,8 @@ import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-
+// import './src/constants/ignoreWarning';
+import './src/constants/ignoreWarning';
 import RootNavigation from './src/navigation/rootNavigation';
 
 import { Provider } from 'react-redux';

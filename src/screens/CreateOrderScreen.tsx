@@ -462,7 +462,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
   },
-
   image: {
     height: 200,
     width: '100%',

@@ -30,58 +30,64 @@ const NotiScreen = () => {
         setPackgeStatus(res?.data?.items);
         setNumOfNoti(res?.data?.items?.length ?? 0);
         hideLoading();
+      }else{
+        hideLoading()
+        alert('loi api');
+
       }
     });
     // console.log(packageStatus)
   }, []);
  
   const onPressItem = (itemData: any) => {
-    const formdata = new FormData();
-    formdata.append('image[]', {
-            name: 'test.' + packageStatus[0]?.image?.type?.substr(6),
-            type: packageStatus[0]?.image?.type,
-            uri:
-              Platform.OS !== 'android'
-                ? 'file://' + packageStatus[0]?.image?.uri
-                : packageStatus[0]?.image?.uri,
+    navigation.navigate('PackageDetailScreen', {
+          dataFromNoti: itemData,})
+    // const formdata = new FormData();
+    // formdata.append('image[]', {
+    //         name: 'test.' + packageStatus[0]?.image?.type?.substr(6),
+    //         type: packageStatus[0]?.image?.type,
+    //         uri:
+    //           Platform.OS !== 'android'
+    //             ? 'file://' + packageStatus[0]?.image?.uri
+    //             : packageStatus[0]?.image?.uri,
               
-          });
-          setFormImage(formdata)
-          console.log('FormData:', formdata);
-          console.log(  
-      packageStatus[0]?.id,
-      packageStatus[0]?.busId,
-      packageStatus[0]?.fromOfficeId,
-      packageStatus[0]?.toOfficeId,
-      packageStatus[0]?.stationId,
-      packageStatus[0]?.quantity,
-      packageStatus[0]?.totalWeight,
-      packageStatus[0]?.totalPrice,
-      // packageStatus[0]?.image,
-      packageStatus[0]?.note,
-     )
-    updatePackageApi(
-      packageStatus[0]?.id,
-      packageStatus[0]?.busId,
-      packageStatus[0]?.fromOfficeId,
-      packageStatus[0]?.toOfficeId,
-      packageStatus[0]?.stationId,
-      packageStatus[0]?.quantity,
-      packageStatus[0]?.totalWeight,
-      packageStatus[0]?.totalPrice,
-      formImage,
-      packageStatus[0]?.note,
-      0,
-    ).then((res: any) => {
-      navigation.navigate('PackageDetailScreen', {
-        dataFromNoti: itemData,
-      });
-      // console.log(res)
-      // if (res?.statusCode === 200) {
-      //   console.log(res?.data?.items);
+    //       });
+    //       setFormImage(formdata)
+    //       console.log('FormData:', formdata);
+    //       console.log(  
+    //   packageStatus[0]?.id,
+    //   packageStatus[0]?.busId,
+    //   packageStatus[0]?.fromOfficeId,
+    //   packageStatus[0]?.toOfficeId,
+    //   packageStatus[0]?.stationId,
+    //   packageStatus[0]?.quantity,
+    //   packageStatus[0]?.totalWeight,
+    //   packageStatus[0]?.totalPrice,
+    //   // packageStatus[0]?.image,
+    //   packageStatus[0]?.note,
+    //  )
+    // updatePackageApi(
+    //   packageStatus[0]?.id,
+    //   packageStatus[0]?.busId,
+    //   packageStatus[0]?.fromOfficeId,
+    //   packageStatus[0]?.toOfficeId,
+    //   packageStatus[0]?.stationId,
+    //   packageStatus[0]?.quantity,
+    //   packageStatus[0]?.totalWeight,
+    //   packageStatus[0]?.totalPrice,
+    //   formImage,
+    //   packageStatus[0]?.note,
+    //   0,
+    // ).then((res: any) => {
+    //   navigation.navigate('PackageDetailScreen', {
+    //     dataFromNoti: itemData,
+    //   });
+    //   // console.log(res)
+    //   // if (res?.statusCode === 200) {
+    //   //   console.log(res?.data?.items);
     
-      // }
-    });;
+    //   // }
+    // });;
   
   };
   return (

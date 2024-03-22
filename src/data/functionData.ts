@@ -5,9 +5,9 @@ export const dataMainFunction  = [
         imgName: require('../assets/sticker/searching.png')
     },
     {
-        id: 2,
-        name: 'Tìm đường',
-        imgName: require('../assets/sticker/location.png')
+        id: 6,
+        name: 'Văn phòng gần đây',
+        imgName: require('../assets/sticker/location-pin.png')
     },
     {
         id: 3,
@@ -17,19 +17,15 @@ export const dataMainFunction  = [
 ]
 
 export const dataSmartFunction = [
-    {
-        id: 4,
-        name: 'Thời tiết',
-        imgName: require('../assets/sticker/cloudy.png')
-    },
-    {
-        id: 5,
-        name: 'Thông tin xe',
-        imgName: require('../assets/sticker/school-bus.png')
-    },
-    {
-        id: 6,
-        name: 'Văn phòng gần đây',
-        imgName: require('../assets/sticker/location-pin.png')
-    },
+    // {
+    //     id: 4,
+    //     name: 'Thời tiết',
+    //     imgName: require('../assets/sticker/cloudy.png')
+    // },
+    // {
+    //     id: 5,
+    //     name: 'Thông tin xe',
+    //     imgName: require('../assets/sticker/school-bus.png')
+    // },
+   
 ]

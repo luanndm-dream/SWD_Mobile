@@ -25,7 +25,7 @@ const UserInformationScreen = () => {
     },
     {
       label: 'Giới tính',
-      value: userData?.name === '1' ? 'Nam' : 'Nữ',
+      value: userData?.gentle === 1 ? 'Nam' : 'Nữ',
     },
     {
       label: 'Số căn cước',

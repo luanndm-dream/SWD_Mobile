@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Image } from 'react-native';
 
 const MapScreen = () => {
   const route = useRoute<any>();
@@ -55,13 +56,15 @@ const MapScreen = () => {
           style={styles.map}
           initialRegion={initialRegion}>
           {/* Hiển thị Marker tại vị trí của phần tử hiện tại */}
-          {data?.map((marker, index) => (
+          {data?.map((marker:any, index:any) => (
             <Marker
               key={index}
               coordinate={{
                 latitude: parseFloat(marker.lat),
                 longitude: parseFloat(marker.lng),
+                
               }}
+              style={{width: 200, height: 100}}
               title={`ID ${data[currentIndex]?.id}`}
               description={data[currentIndex]?.name}
               onPress={() => console.log('1')}>
@@ -69,6 +72,7 @@ const MapScreen = () => {
                 style={
                   styles.markerCustom
                 }>{`Trạm: ID ${data[currentIndex]?.id} - ${data[currentIndex]?.name}`}</Text>
+                <Image source={require('../assets/image/bus-station.png')} style={{width: 60, height: 60}}/>
             </Marker>
           ))}
         </MapView>

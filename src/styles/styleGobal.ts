@@ -8,10 +8,10 @@ export default StyleSheet.create({
   },
   contentArea: {
     flex: 1,
-
-    paddingTop: Platform.OS === 'android' ? 20 : 0,
+    marginTop: 20 ,
     paddingHorizontal: 12,
     backgroundColor: '#FFFFFF',
+    borderRadius: 8
   },
   boxShadow:
     Platform.OS === 'ios'

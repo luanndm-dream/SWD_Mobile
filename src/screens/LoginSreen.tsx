@@ -10,24 +10,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-
-import CheckBox from '@react-native-community/checkbox';
-import { ButtonComponent, TextInputComponent } from '@/components';
+import { ButtonComponent, PopupNotificationComponent, TextInputComponent } from '@/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { useAppSelector } from '@/redux/reduxHook';
 import { styleGobal } from '@/styles'
 import { useAppDispatch, useAppSelector } from 'src/redux/reduxHook';
 import { loginAPI } from 'src/api';
 import useLoading from 'src/hook/useLoading';
 import { setUserInfo } from 'src/redux/slice';
 import { useNavigation } from '@react-navigation/native';
-import MainScreen from './MainScreen';
+
 
 const LoginScreen: React.FC = () => {
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [toggle, setToggle] = useState<boolean>(false);
-
+  const [popupVisible, setPopupVisible] = useState<any>(false);
   const {showLoading, hideLoading} = useLoading();
   const dispatch = useAppDispatch();
   const navigation = useNavigation()
@@ -43,6 +40,7 @@ const LoginScreen: React.FC = () => {
   const handleLogin = () =>{   
     showLoading()
     loginAPI(userName,password).then( async (res: any)=>{
+      console.log(res)
       if(res?.statusCode === 200){
         hideLoading()
         // storeData(res)
@@ -64,6 +62,7 @@ const LoginScreen: React.FC = () => {
         hideLoading()
       }else{
         hideLoading()
+        setPopupVisible(true)
       }
     })
   }
@@ -71,6 +70,7 @@ const LoginScreen: React.FC = () => {
 
 
   return (
+    <>
     <SafeAreaView
       onTouchStart={() => Keyboard.dismiss()}
       style={styleGobal.androidSafeArea}>
@@ -123,7 +123,23 @@ const LoginScreen: React.FC = () => {
           </View>
         </View>
       </KeyboardAvoidingView>
+      
     </SafeAreaView>
+    {popupVisible && (
+      <PopupNotificationComponent
+        style={styles.popup}
+        isVisible={popupVisible}
+        onCancel={() => setPopupVisible(false)}
+        iconName='close-circle'
+        color='red'
+        title='Đăng nhập thất bại'
+        content='Vui lòng đăng nhập lại'
+        buttonColor= 'red'
+        buttonText='Xác nhận'
+        onConfirm={() =>{setPopupVisible(false)}}
+      />
+    )}
+    </>
   );
 };
 
@@ -132,6 +148,15 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 20
+  },
+  popup: {
+    zIndex: 1,
+    backgroundColor: 'white',
+    paddingVertical: 20,
+    top: '40%',
+    width: '90%',
+    alignSelf: 'center',
   },
   textContainer: {
     flex: 1,

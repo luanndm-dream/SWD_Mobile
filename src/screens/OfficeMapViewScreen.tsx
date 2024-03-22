@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -16,7 +16,7 @@ const OfficeMapViewScreen = () => {
     longitudeDelta: 0.007,
   });
   useEffect(() => {
-    if (dataOffice.length > 0) {
+    if (dataOffice?.length > 0) {
       const currentMarker = dataOffice[currentIndex];
       setInitialRegion({
         latitude: parseFloat(currentMarker.lat),
@@ -26,7 +26,8 @@ const OfficeMapViewScreen = () => {
       });
     }
   }, [dataOffice, currentIndex]);
-  console.log(dataOffice);
+  
+  // console.log(dataOffice);
   const changeInitialRegion = () => {
     let nextIndex = currentIndex + 1;
     if (nextIndex >= dataOffice.length) {
@@ -57,7 +58,7 @@ const OfficeMapViewScreen = () => {
             longitudeDelta: 0.007,
           }}>
           {/* Hiển thị Marker tại vị trí của phần tử hiện tại */}
-          {dataOffice?.map((marker, index) => (
+          {dataOffice?.map((marker:any, index:any) => (
             <Marker
               key={index}
               coordinate={{
@@ -68,6 +69,7 @@ const OfficeMapViewScreen = () => {
                 style={
                   styles.markerCustom
                 }>{`Văn phòng: ID ${dataOffice[currentIndex]?.id} - ${dataOffice[currentIndex]?.name}`}</Text>
+                 <Image source={require('../assets/image/building.png')} style={{width: 60, height: 60}}/>
             </Marker>
           ))}
         </MapView>
