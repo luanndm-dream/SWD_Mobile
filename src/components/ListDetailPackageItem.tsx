@@ -1,15 +1,26 @@
-import {Image, StyleSheet, Text, View, TouchableOpacity,TextInput} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Formik} from 'formik';
 
 interface ListDetailPackageItemProps {
   label: string;
-  value: string;
+  value: any;
   imageUrl?: string;
   isLastItem?: boolean;
   isImage?: boolean;
   isEdit?: boolean;
+  onValueChange?: (label: string, newValue: any) => void;
+  onSubmit?: (values: any) => void;
 }
+
 const ListDetailPackageItem: React.FC<ListDetailPackageItemProps> = ({
   label,
   value,
@@ -17,7 +28,11 @@ const ListDetailPackageItem: React.FC<ListDetailPackageItemProps> = ({
   isImage,
   imageUrl,
   isEdit,
+  onSubmit,
+  onValueChange,
 }) => {
+  const onChangeText = () => {};
+
   return (
     <>
       <View
@@ -30,9 +45,31 @@ const ListDetailPackageItem: React.FC<ListDetailPackageItemProps> = ({
         ]}>
         <Text style={styles.label}>{label}</Text>
         <View style={styles.valueContainer}>
-          <TextInput editable={isEdit? true : false} style={styles.value}>{value}</TextInput>
-          {isEdit &&<MaterialCommunityIcons name="pencil" size={20} /> }
+          <Formik
+            initialValues={{value: value}}
+            onSubmit={values => {
+              console.log(values);
           
+              // if (onSubmit) {
+              //   onSubmit(values);
+              // }
+            }}>
+            {({handleChange, handleBlur, handleSubmit, values}) => (
+              <>
+                <TextInput
+                  editable={isEdit ?? false}
+                  style={styles.value}
+                  // onChangeText={newValue => onValueChange(label, newValue)} // Gọi hàm onValueChange khi giá trị thay đổi
+                  onBlur={handleBlur('value')}
+                  value={values.value}
+                />
+
+                {isEdit && !isLastItem && (
+                  <MaterialCommunityIcons name="pencil" size={20} />
+                )}
+              </>
+            )}
+          </Formik>
         </View>
       </View>
       {isImage && (
@@ -56,7 +93,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 17,
+    marginVertical: 1,
     alignItems: 'center',
   },
   label: {
@@ -68,6 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
+    textAlign: 'center',
   },
   imageContainer: {
     justifyContent: 'center',
@@ -80,5 +118,11 @@ const styles = StyleSheet.create({
   },
   valueContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    height: 'auto',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
   },
 });

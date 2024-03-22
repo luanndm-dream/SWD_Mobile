@@ -6,9 +6,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {styleGobal} from '@/styles';
 import {
+  ButtonComponent,
   DualButtonComponent,
   HeaderComponent,
   ListDetailPackageItem,
@@ -26,7 +27,7 @@ const PackageDetailScreen: React.FC = () => {
   const [popupVisible, setPopupVisible] = useState<any>(false);
   const [typeButton, setTypeButton] = useState<string>('left');
   const [isEdit, setIsEdit] = useState<boolean>(false);
-
+  const [allFieldsValid, setAllFieldsValid] = useState<boolean>(false);
   const {
     id,
     busId,
@@ -39,41 +40,41 @@ const PackageDetailScreen: React.FC = () => {
     note,
     status,
     createTime,
-  } = route.params.data;
-  const packageInfo = [
+  } = route.params.data || route.params.dataFromNoti;
+  const [packageInfo,setPackageInfo] = useState([
     {
       label: 'Mã đơn hàng',
-      value: id,
+      value: id.toString(),
       isLastValue: false,
     },
     {
       label: 'Cân nặng(kg)',
-      value: totalWeight,
+      value: totalWeight.toString(),
       isLastValue: false,
     },
     {
       label: 'Từ trạm',
-      value: fromOfficeId,
+      value: fromOfficeId.toString(),
       isLastValue: false,
     },
     {
       label: 'Thời gian',
-      value: createTime,
+      value: createTime.toString(),
       isLastValue: false,
     },
     {
       label: 'Mã số xe',
-      value: busId,
+      value: busId.toString(),
       isLastValue: false,
     },
     {
       label: 'Ghi chú',
-      value: note,
+      value: note.toString(),
       isLastValue: false,
     },
     {
       label: 'Tổng tiền',
-      value: totalPrice,
+      value: totalPrice.toString(),
       isLastValue: false,
     },
     {
@@ -82,7 +83,7 @@ const PackageDetailScreen: React.FC = () => {
       isImage: true,
       isLastValue: true,
     },
-  ];
+  ]);
 
   const getStyle = (status: any) => {
     switch (status) {
@@ -129,6 +130,27 @@ const PackageDetailScreen: React.FC = () => {
   const onPressBackIcon = () => {
     navigation.goBack();
   };
+  const onEditHandle = () => {
+
+      console.log('edit Success');
+      setIsEdit(false);
+  
+  }
+  const onSubmitEdit = (values: any) => {
+    // Xử lý dữ liệu từ component con ở đây
+    console.log("Submitted values:", values);
+  };
+  const handleValueChange = (label: string, newValue: any) => {
+    // Tìm và cập nhật giá trị mới cho label tương ứng
+    setPackageInfo((prevPackageInfo) =>
+      prevPackageInfo.map((item) =>
+        item.label === label ? { ...item, value: newValue } : item
+      )
+    );
+  };
+  useEffect(()=>{
+    console.log(packageInfo[2])
+  },[packageInfo, onEditHandle])
 
   return (
     <>
@@ -162,12 +184,14 @@ const PackageDetailScreen: React.FC = () => {
                     imageUrl={item.imageUrl}
                     isImage={item.isImage}
                     isEdit={isEdit}
-                  />
+                    onSubmit={onSubmitEdit}                  />
                 </>
               );
             }}
           />
-          {status === -1 && (
+          
+          {status === -1 && isEdit === false ? (
+            <>
             <View style={styles.dualButton}>
               <DualButtonComponent
                 textLeft="Xoá đơn"
@@ -176,7 +200,9 @@ const PackageDetailScreen: React.FC = () => {
                 onPressRight={() => onPressButton('right')}
               />
             </View>
-          )}
+            </>
+            
+          ): <ButtonComponent buttonText='Chỉnh sửa' style={{backgroundColor: '#366AE2', marginBottom: 20}} onPress={()=>onEditHandle()}/>}
         </SafeAreaView>
         {popupVisible && (
           <PopupComponent

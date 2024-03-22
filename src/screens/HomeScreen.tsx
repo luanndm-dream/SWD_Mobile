@@ -10,22 +10,39 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import styleGobal from 'styles/styleGobal'
 
 import {SearchComponent, IconFunctionComponent} from '@/components';
 import {dataMainFunction,dataSmartFunction} from '@/data';
 import { useNavigation } from '@react-navigation/native';
+import { getStationApi } from 'src/api/get_station_api';
+import useLoading from 'src/hook/useLoading';
 
 
 // import { styleGobal } from 'styles'
 
 const HomeScreen: React.FC = () => {
-  const navigation = useNavigation()
+  const [dataStation, setDataStation] = useState<any>();
+  const {showLoading, hideLoading} = useLoading()
+  useEffect(() => {
+    showLoading()
+    getStationApi().then((res: any) => {
+      if(res?.statusCode === 200){
+        setDataStation(res.data.items);
+          hideLoading()
+      }
+      console.log('res', res?.data.items)
+
+  });
+  }, []);
+  const navigation = useNavigation<any>()
   const onPressIconHandle = (name: string)=>{
           switch(name){
             case 'Tra cứu' :{
-              navigation.navigate('MapScreen' as never)
+              navigation.navigate('MapScreen', {
+                data: dataStation
+              })
               break;
             }
             case'Tìm Đường' : {
@@ -34,6 +51,12 @@ const HomeScreen: React.FC = () => {
             }
             case'Tạo đơn' : {
               navigation.navigate('CreateOrderScreen' as never)
+              break;
+            }
+            case 'Văn phòng gần đây' :{
+              navigation.navigate('MapScreen', {
+                data: dataStation
+              })
               break;
             }
           }
@@ -88,6 +111,7 @@ const HomeScreen: React.FC = () => {
                     <IconFunctionComponent
                       name={item.name}
                       imgUrl={item.imgName}
+                      onPress={()=>onPressIconHandle(item.name)}
                     />
                   </View>
                 );

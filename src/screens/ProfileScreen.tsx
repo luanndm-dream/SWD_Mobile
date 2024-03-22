@@ -1,11 +1,26 @@
 import {View, Text, ImageBackground, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {BoardNameComponent, ButtonComponent, ProfileItemComponent} from '@/components';
 import {styleGobal} from '@/styles';
 import { useNavigation } from '@react-navigation/native';
+import { getUserByIdApi } from 'src/api/get_user_api';
+import useLoading from 'src/hook/useLoading';
 
 const ProfileScreen: React.FC = () => {
-  const navigate = useNavigation();
+  const navigation = useNavigation<any>();
+  const {showLoading, hideLoading} = useLoading()
+  const [userData, setUserDate] = useState<any>()
+  useEffect(()=>{
+    showLoading()
+      getUserByIdApi(6).then((res: any) => {
+        if (res?.statusCode === 200) {
+          hideLoading()
+          setUserDate(res.data);
+          hideLoading();
+        }
+      })
+  },[])
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -15,10 +30,9 @@ const ProfileScreen: React.FC = () => {
       <View style={[styles.content, styleGobal.contentArea ]}>
         <View style={[styles.boardName]}>
           <BoardNameComponent
-            name="Nguyễn Thành Phú"
-            avatarUrl={require('../assets/image/78787.jpg')}
-            code="POS1"
-            position="Chuyên viên kiểm tra hàng hoá"
+            name={userData?.name}
+            avatarUrl={userData?.avatar}
+            position={userData?.roleDescription}
           />
         </View>
         <View>
@@ -27,6 +41,9 @@ const ProfileScreen: React.FC = () => {
             title="Thông tin cá nhân"
             style={styles.styleItem}
             isBox={false}
+            onPressIcon={()=>navigation.navigate('UserInformationScreen', {
+              data: userData
+            })}
           />
         </View>
         <View style={styles.box}>
@@ -47,7 +64,7 @@ const ProfileScreen: React.FC = () => {
             title="Thông tin công ty"
             isBox={true}
             onPressIcon={()=>{
-              navigate.navigate('CompanyInformationScreen' as never);
+              navigation.navigate('CompanyInformationScreen' as never);
             }}
           />
           

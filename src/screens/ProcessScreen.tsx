@@ -92,6 +92,7 @@ const ProcessScreen = () => {
 };
 const onNavigationDetailScreen = (item: any) => {
   navigation.navigate('PackageDetailScreen', {
+   
     data: item
   });
 };

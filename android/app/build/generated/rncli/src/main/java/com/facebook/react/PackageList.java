@@ -21,6 +21,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-image-picker
+import com.imagepicker.ImagePickerPackage;
 // react-native-maps
 import com.rnmaps.maps.MapsPackage;
 // react-native-pager-view
@@ -85,6 +87,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
+      new ImagePickerPackage(),
       new MapsPackage(),
       new PagerViewPackage(),
       new ReanimatedPackage(),

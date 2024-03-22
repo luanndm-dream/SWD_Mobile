@@ -1,13 +1,15 @@
 #import "AppDelegate.h"
-
+#import <GoogleMaps/GoogleMaps.h>
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyAHx8KANDNuBZoBeCwZJf0k6mFytjksA3E"];
   self.moduleName = @"BusDelivery";
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

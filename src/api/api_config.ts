@@ -80,17 +80,19 @@ protectedAxios.interceptors.request.use(
         ...response.data,
         statusCode: response.status,
       };
-      console.log('vào congif API', responseObj)
+      // console.log('vào congif API', responseObj)
       return responseObj;
     },
     function (error): number {
       console.log('loi trong function Axios Error', error)
+      // console.log('Status code 400 error:', error.response);
         const statusCode = error.response.status
       if(error?.response?.status == statusCode){
         // store.dispatch(removeUser());
         // RootNavigation.navigate(SCREENS.LOGIN)
       } else if (error.response && error.response.status === 400) {
         console.log('Status code 400 error:', error.response.data);
+        console.log('Status code 400 error:', error.response.errors);
     }
       return statusCode;
     }
