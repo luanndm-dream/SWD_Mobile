@@ -22,14 +22,14 @@ export async function createPackageAPI(
       quantity,
       totalWeight,
       totalPrice,
-      image : BASE64_TEST,
-      note : '11111',
+      image : image,
+      note : note,
       status,
     };
     console.log('dataSend', dataSend)
     try {
-      const response = await protectedAxios.post(url, dataSend);
-      return response.data; // Trả về dữ liệu từ API
+      const response = await protectedAxios.post(url, dataSend, {headers: {"Content-Type": 'multipart/form-data'}});
+      return response; // Trả về dữ liệu từ API
     } catch (error) {
       console.error('Error creating package:', error);
       throw error; // Ném lỗi nếu có vấn đề khi gửi request

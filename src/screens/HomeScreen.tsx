@@ -18,24 +18,32 @@ import {dataMainFunction,dataSmartFunction} from '@/data';
 import { useNavigation } from '@react-navigation/native';
 import { getStationApi } from 'src/api/get_station_api';
 import useLoading from 'src/hook/useLoading';
+import { getOfficeApi } from 'src/api/get_office_api';
 
 
 // import { styleGobal } from 'styles'
 
 const HomeScreen: React.FC = () => {
   const [dataStation, setDataStation] = useState<any>();
+  const [dataOffice, setDataOffice] = useState<any>();
   const {showLoading, hideLoading} = useLoading()
   useEffect(() => {
     showLoading()
+    getOfficeApi().then((res: any) =>{
+      if(res?.statusCode === 200){
+       
+        setDataOffice(res.data.items);
+      }
+    })
     getStationApi().then((res: any) => {
       if(res?.statusCode === 200){
         setDataStation(res.data.items);
           hideLoading()
       }
-      console.log('res', res?.data.items)
-
   });
+  
   }, []);
+
   const navigation = useNavigation<any>()
   const onPressIconHandle = (name: string)=>{
           switch(name){
@@ -54,8 +62,8 @@ const HomeScreen: React.FC = () => {
               break;
             }
             case 'Văn phòng gần đây' :{
-              navigation.navigate('MapScreen', {
-                data: dataStation
+              navigation.navigate('OfficeMapViewScreen', {
+                dataOffice: dataOffice
               })
               break;
             }
@@ -85,7 +93,7 @@ const HomeScreen: React.FC = () => {
               numColumns={3}
               data={dataMainFunction}
               renderItem={({item}) => {
-                console.log('data', item.imgName, item.name);
+              
                 return (
                   <View style={styles.dataGridView}>
                     <IconFunctionComponent
@@ -105,7 +113,7 @@ const HomeScreen: React.FC = () => {
             numColumns={3}
               data={dataSmartFunction}
               renderItem={({item}) => {
-                console.log('data', item.imgName, item.name);
+        
                 return (
                   <View style={styles.dataGridView}>
                     <IconFunctionComponent

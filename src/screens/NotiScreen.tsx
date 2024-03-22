@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {HeaderComponent} from '@/components';
@@ -18,6 +19,8 @@ const NotiScreen = () => {
   const [packageStatus, setPackgeStatus] = useState<any>();
   const [numOfNoti, setNumOfNoti] = useState<number>(0);
   const {showLoading, hideLoading} = useLoading();
+  const [formImage, setFormImage] = useState<any>();
+
   const navigation = useNavigation<any>();
   useEffect(() => {
     showLoading();
@@ -31,8 +34,21 @@ const NotiScreen = () => {
     });
     // console.log(packageStatus)
   }, []);
+ 
   const onPressItem = (itemData: any) => {
-    console.log(  
+    const formdata = new FormData();
+    formdata.append('image[]', {
+            name: 'test.' + packageStatus[0]?.image?.type?.substr(6),
+            type: packageStatus[0]?.image?.type,
+            uri:
+              Platform.OS !== 'android'
+                ? 'file://' + packageStatus[0]?.image?.uri
+                : packageStatus[0]?.image?.uri,
+              
+          });
+          setFormImage(formdata)
+          console.log('FormData:', formdata);
+          console.log(  
       packageStatus[0]?.id,
       packageStatus[0]?.busId,
       packageStatus[0]?.fromOfficeId,
@@ -53,16 +69,18 @@ const NotiScreen = () => {
       packageStatus[0]?.quantity,
       packageStatus[0]?.totalWeight,
       packageStatus[0]?.totalPrice,
-      packageStatus[0]?.image,
+      formImage,
       packageStatus[0]?.note,
       0,
     ).then((res: any) => {
-      if (res?.statusCode === 200) {
-        console.log(res?.data?.items);
-        navigation.navigate('PackageDetailScreen', {
-          dataFromNoti: itemData,
-        });
-      }
+      navigation.navigate('PackageDetailScreen', {
+        dataFromNoti: itemData,
+      });
+      // console.log(res)
+      // if (res?.statusCode === 200) {
+      //   console.log(res?.data?.items);
+    
+      // }
     });;
   
   };

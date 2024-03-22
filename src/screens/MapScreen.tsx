@@ -7,6 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const MapScreen = () => {
   const route = useRoute<any>();
   const data = route.params.data;
+  
   const navigation = useNavigation<any>();
   const [initialRegion, setInitialRegion] = useState({
     latitude: 0,
@@ -15,7 +16,7 @@ const MapScreen = () => {
     longitudeDelta: 0.007,
   });
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  
   useEffect(() => {
     if (data.length > 0) {
       const currentMarker = data[currentIndex];
@@ -26,6 +27,7 @@ const MapScreen = () => {
         longitudeDelta: 0.007,
       });
     }
+    console.log('init', initialRegion)
   }, [data, currentIndex]);
 
   const changeInitialRegion = () => {
@@ -66,7 +68,7 @@ const MapScreen = () => {
               <Text
                 style={
                   styles.markerCustom
-                }>{`ID ${data[currentIndex]?.id} - ${data[currentIndex]?.name}`}</Text>
+                }>{`Trạm: ID ${data[currentIndex]?.id} - ${data[currentIndex]?.name}`}</Text>
             </Marker>
           ))}
         </MapView>

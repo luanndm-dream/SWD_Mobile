@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 15,
+        paddingHorizontal: 15
     },
     isRequired: {
         color: 'red',

@@ -105,12 +105,12 @@ const onNavigationDetailScreen = (item: any) => {
             <View style={styles.dateTimePicker}>
               <DateTimePickerComponent
                 text={fromDate ? fromDate.toString() : 'Từ ngày'}
-                isRequired={true}
+                // isRequired={true}
                 onPress={() => onPressDatePicker('fromDate')}
               />
               <DateTimePickerComponent
                 text={toDate ? toDate.toString() : 'Đến ngày'}
-                isRequired={true}
+                // isRequired={true}
                 onPress={() => onPressDatePicker('toDate')}
               />
             </View>

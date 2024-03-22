@@ -190,7 +190,7 @@ const PackageDetailScreen: React.FC = () => {
             }}
           />
           
-          {status === -1 && isEdit === false ? (
+          {/* {status === -1 && isEdit === false ? (
             <>
             <View style={styles.dualButton}>
               <DualButtonComponent
@@ -202,7 +202,7 @@ const PackageDetailScreen: React.FC = () => {
             </View>
             </>
             
-          ): <ButtonComponent buttonText='Chỉnh sửa' style={{backgroundColor: '#366AE2', marginBottom: 20}} onPress={()=>onEditHandle()}/>}
+          ): <ButtonComponent buttonText='Chỉnh sửa' style={{backgroundColor: '#366AE2', marginBottom: 20}} onPress={()=>onEditHandle()}/>} */}
         </SafeAreaView>
         {popupVisible && (
           <PopupComponent

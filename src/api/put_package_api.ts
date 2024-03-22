@@ -13,8 +13,8 @@ export function updatePackageApi(
   note: string,
   status: number,
 ) {
-  const params: object = {
-    id: id,
+  const dataSend= { 
+    packageId: id,
     busId: busId,
     fromOfficeId: fromOfficeId,
     toOfficeId: toOfficeId,
@@ -24,8 +24,8 @@ export function updatePackageApi(
     totalPrice: totalPrice,
     image: imageUrl,
     note: note,
-    status: status,
+    status: 0,
   };
   const url = `/Package/${id}`;
-  return protectedAxios.put(url, {params: params});
+  return protectedAxios.put(url, dataSend, {headers: {"Content-Type": 'multipart/form-data'}});
 }

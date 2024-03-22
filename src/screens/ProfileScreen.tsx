@@ -5,11 +5,15 @@ import {styleGobal} from '@/styles';
 import { useNavigation } from '@react-navigation/native';
 import { getUserByIdApi } from 'src/api/get_user_api';
 import useLoading from 'src/hook/useLoading';
+import { useAppDispatch } from '@/redux';
+import { resetUserInfo } from 'src/redux/slice';
 
 const ProfileScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   const {showLoading, hideLoading} = useLoading()
   const [userData, setUserDate] = useState<any>()
+  const dispatch = useAppDispatch();
+  
   useEffect(()=>{
     showLoading()
       getUserByIdApi(6).then((res: any) => {
@@ -20,6 +24,12 @@ const ProfileScreen: React.FC = () => {
         }
       })
   },[])
+  const handleLogout = () => {
+    // Dispatch action to reset user info
+    dispatch(resetUserInfo());
+    navigation.navigate('LoginScreen')
+    // Perform logout logic, such as redirecting to login screen, clearing tokens, etc.
+  };
 
   return (
     <View style={styles.container}>
@@ -47,7 +57,7 @@ const ProfileScreen: React.FC = () => {
           />
         </View>
         <View style={styles.box}>
-          <ProfileItemComponent
+          {/* <ProfileItemComponent
             iconName={'cog'}
             title="Cài đặt"
             isBox={true}
@@ -58,7 +68,7 @@ const ProfileScreen: React.FC = () => {
             title="Đánh giá ứng dụng"
             isBox={true}
             style={{ borderBottomWidth: StyleSheet.hairlineWidth,}}
-          />
+          /> */}
           <ProfileItemComponent
             iconName={'information'}
             title="Thông tin công ty"
@@ -70,7 +80,7 @@ const ProfileScreen: React.FC = () => {
           
         </View>
         <View style={styles.button}>
-          <ButtonComponent buttonText='Đăng xuất' onPress={()=>{}} colorButton='#9ecbfe' />
+          <ButtonComponent buttonText='Đăng xuất' onPress={handleLogout} colorButton='#9ecbfe' />
         </View>
       </View>
     </View>

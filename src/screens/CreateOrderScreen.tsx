@@ -18,6 +18,8 @@ import {
   HeaderComponent,
   ModalBottomSearchBusComponent,
   ModalBottomSearchComponent,
+  PopupComponent,
+  PopupNotificationComponent,
 } from '@/components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {styleGobal} from '@/styles';
@@ -33,10 +35,11 @@ import {
 } from 'react-native-image-picker';
 import {createPackageAPI} from 'src/api/post_createPackage';
 import {BASE64_TEST} from '@/constants';
+import useLoading from 'src/hook/useLoading';
 
 const CreateOrderScreen = () => {
   const route = useRoute<any>();
-  console.log('route',route)
+  console.log('route', route);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isSelectionBus, setIsSelectionBus] = useState<boolean>(false);
   const [selectedBus, setIsSelectedBus] = useState<number>();
@@ -52,6 +55,9 @@ const CreateOrderScreen = () => {
   const [note, setNote] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<string | undefined>('');
   const [response, setResponse] = React.useState<any>(null);
+  const [popupVisible, setPopupVisible] = useState<any>(false);
+  const [statusCreate, setStatusCreate] = useState<string>('');
+  const {showLoading, hideLoading} = useLoading();
   const [visibleDateTimePicker, setVisibleDateTimePicker] =
     useState<boolean>(false);
   const includeExtra = true;
@@ -71,16 +77,23 @@ const CreateOrderScreen = () => {
     setVisibleDateTimePicker(false);
   };
 
-  useEffect(()=>{
-    setFromStationId(route.params.data.stationId);
-    setFromStationName(route.params.data.stationName);
-  },[route])
+  useEffect(() => {
+    if (route.params?.data) {
+      console.log('station');
+      const {stationId, stationName} = route.params.data;
+      setFromStationId(stationId);
+      setFromStationName(stationName);
+    } else if (route.params?.dataOffice) {
+      console.log('office');
+      const {officeId, officeName} = route.params.dataOffice;
+      setToOfficeId(officeId);
+    }
+  }, [route]);
   const handleSelectStation = (
     stationId: number,
 
     stationName: string,
   ) => {
-
     setFromStationId(stationId);
     setFromStationName(stationName);
   };
@@ -105,7 +118,7 @@ const CreateOrderScreen = () => {
     navigation.goBack();
   };
   const submitHandle = () => {
-   
+    showLoading();
     createPackageAPI(
       selectedBus as never,
       fromOfficeId,
@@ -114,11 +127,20 @@ const CreateOrderScreen = () => {
       quantity,
       totalWeight,
       totalPrice,
-      BASE64_TEST,
-      'note',
+      imageUrl,
+      note,
       5,
-    ).then(res => {
-      // console.log('create', res);
+    ).then((res: any) => {
+      console.log('res', res)
+      if (res?.statusCode === 200) {
+        hideLoading();
+        setStatusCreate('done');
+        setPopupVisible(true);
+      } else {
+        setStatusCreate('not');
+        setPopupVisible(true);
+        hideLoading();
+      }
     });
   };
 
@@ -138,7 +160,7 @@ const CreateOrderScreen = () => {
       // Check if assets array is not empty
       if (response.assets.length > 0) {
         const base64Image = response.assets[0].base64;
-        // setImageUrl(base64Image);
+        setImageUrl(base64Image);
       }
     }
   }, [response]);
@@ -335,7 +357,28 @@ const CreateOrderScreen = () => {
         onCancel={() => setIsSelectionBus(false)}
         onSelectStation={handleSelectBus}
       />
-
+      {popupVisible && (
+        <PopupNotificationComponent
+          style={styles.popup}
+          isVisible={popupVisible}
+          onCancel={() => setPopupVisible(false)}
+          iconName={statusCreate === 'done' ? 'check-circle' : 'close-circle'}
+          color={statusCreate === 'done' ? 'green' : 'red'}
+          title={statusCreate === 'done' ? 'Thành công' : 'Thất bại '}
+          content={
+            statusCreate === 'done' ? 'Đã tạo thành công' : 'Tạo thất bại'
+          }
+          buttonColor={statusCreate === 'done' ? 'green' : 'red'}
+          buttonText={statusCreate === 'done' ? 'Xác nhận' : 'Xác nhận'}
+          onConfirm={() => {
+            if (statusCreate === 'done') {
+              navigation.goBack();
+            } else {
+              setPopupVisible(false);
+            }
+          }}
+        />
+      )}
       {visibleDateTimePicker && (
         <DatePicker
           onCancel={() => setVisibleDateTimePicker(false)}
@@ -351,6 +394,14 @@ export default CreateOrderScreen;
 
 const styles = StyleSheet.create({
   container: {},
+  popup: {
+    zIndex: 1,
+    backgroundColor: 'white',
+    paddingVertical: 20,
+    top: '40%',
+    width: '90%',
+    alignSelf: 'center',
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',

@@ -46,7 +46,7 @@ const LoginScreen: React.FC = () => {
       if(res?.statusCode === 200){
         hideLoading()
         // storeData(res)
-        // dispatch(setUserInfo(res.data));
+        dispatch(setUserInfo(res.data));
         setTimeout(()=> {
             navigation.reset({
               index: 0,
@@ -99,7 +99,7 @@ const LoginScreen: React.FC = () => {
             />
           </View>
           <View style={styles.savePassword}>
-            <CheckBox
+            {/* <CheckBox
               value={toggle}
               boxType="square"
               lineWidth={2}
@@ -110,16 +110,16 @@ const LoginScreen: React.FC = () => {
               onAnimationType={'bounce'}
               offAnimationType={'stroke'}
             />
-            <Text style={styles.savePasswordText}>Save password</Text>
+            <Text style={styles.savePasswordText}>Save password</Text> */}
           </View>
 
           <View style={styles.button}>
             <ButtonComponent buttonText="Login" onPress={handleLogin} colorButton='#4BA2B6' />
           </View>
           <View style={styles.forgotPassword}>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </KeyboardAvoidingView>
